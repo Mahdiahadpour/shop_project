@@ -17,6 +17,7 @@ class Address(models.Model):
     address_name = models.CharField(max_length=50)
     providence = models.CharField(max_length=16)
     city = models.CharField(max_length=35)
+    # address with choice must be added
     address_detail = models.TextField()
 
 
@@ -26,5 +27,3 @@ class CostumerContactInfo(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
 
 
-class CostumerOrderHistory(models.Model):
-    pass
