@@ -17,6 +17,7 @@ class Address(models.Model):
     address_name = models.CharField(max_length=50)
     providence = models.CharField(max_length=16)
     city = models.CharField(max_length=35)
+    postal_code = models.PositiveSmallIntegerField()
     # address with choice must be added
     address_detail = models.TextField()
 
