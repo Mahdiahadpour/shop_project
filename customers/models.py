@@ -9,6 +9,7 @@ class CostumerInfo(models.Model):
     birthday = models.DateField()
     ID_card_number = models.PositiveSmallIntegerField(unique=True, max_length=10)
     E_mail = models.EmailField()
+    date_entered = models.DateField()
 
 
 # going to be a form
