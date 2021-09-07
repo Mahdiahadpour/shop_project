@@ -4,7 +4,6 @@ from django.db import models
 
 # Create your models here.
 class CostumerInfo(models.Model):
-    costumer_user = models.ForeignKey(User, on_delete=models.RESTRICT)
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
     birthday = models.DateField()
@@ -24,6 +23,10 @@ class Address(models.Model):
 class CostumerContactInfo(models.Model):
     mobile_number = models.CharField(max_length=11, null=False, unique=True)
     home_number = models.CharField(max_length=11)
+
+
+class Customer(models.Model):
+    costumer_user = models.OneToOneField(User, on_delete=models.RESTRICT)
+    costumer_info = models.OneToOneField(CostumerInfo, on_delete=models.PROTECT)
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
-
-
+    costumer_contact = models.OneToOneField(CostumerContactInfo, on_delete=models.PROTECT)
