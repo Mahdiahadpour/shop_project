@@ -6,6 +6,9 @@ class Category(models.Model):
     category_name = models.CharField(max_length=100)
     sub_category = models.OneToOneField('self', on_delete=models.CASCADE, blank=True, null=True)
 
+    def __str__(self):
+        return self.category_name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -32,3 +35,6 @@ class Product(models.Model):
     )
     ranking = models.PositiveIntegerField(choices=ranking_choices)
     image = models.ImageField(upload_to='media/product', blank=True, null=True)
+
+    def __str__(self):
+        return self.name

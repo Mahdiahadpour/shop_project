@@ -63,6 +63,9 @@ class CostumerInfo(models.Model):
     E_mail = models.EmailField()
     date_entered = models.DateField(editable=False, auto_now=True)
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 # going to be a form
 class Address(models.Model):
@@ -73,6 +76,9 @@ class Address(models.Model):
     postal_code = models.PositiveSmallIntegerField()
     # address with choice must be added
     address_detail = models.TextField()
+
+    def __str__(self):
+        return f'{self.address_name}'
 
 
 # must be edited
@@ -86,3 +92,6 @@ class Customer(models.Model):
     costumer_info = models.OneToOneField(CostumerInfo, on_delete=models.PROTECT)
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
     costumer_contact = models.OneToOneField(CostumerContactInfo, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return f'{self.costumer_user.first_name} {self.costumer_user.last_name}'
