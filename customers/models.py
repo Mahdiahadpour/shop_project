@@ -1,27 +1,45 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 # Create your models here.
+class User(AbstractUser):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['email']
+    image = models.ImageField(upload_to='media/customers', blank=True, null=True)
+
+    role = (
+        (1, 'admin'),
+        (2, 'staff'),
+        (3, 'customer'),
+    )
+    user_role = models.SmallIntegerField(choices=role, null=True)
+
+    def __str__(self):
+        return self.username
+
+
 class CostumerInfo(models.Model):
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
     birthday = models.DateField()
     ID_card_number = models.PositiveSmallIntegerField(unique=True, max_length=10)
     E_mail = models.EmailField()
-    date_entered = models.DateField()
+    date_entered = models.DateField(editable=False, auto_now=True)
 
 
 # going to be a form
 class Address(models.Model):
     address_name = models.CharField(max_length=50)
     providence = models.CharField(max_length=16)
+    # use library
     city = models.CharField(max_length=35)
     postal_code = models.PositiveSmallIntegerField()
     # address with choice must be added
     address_detail = models.TextField()
 
 
+# must be edited
 class CostumerContactInfo(models.Model):
     mobile_number = models.CharField(max_length=11, null=False, unique=True)
     home_number = models.CharField(max_length=11)
