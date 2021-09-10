@@ -4,14 +4,14 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
-    sub_category = models.CharField(max_length=100)
+    sub_category = models.OneToOneField('self', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     price = models.PositiveIntegerField()
-    price_discount = models.PositiveIntegerField()
+    price_discount = models.PositiveIntegerField(null=True, blank=True)
     category = models.OneToOneField(Category, on_delete=models.PROTECT)
     size_choices = (
         ('extra small', 0),
@@ -31,3 +31,4 @@ class Product(models.Model):
         ('Very Good', 5),
     )
     ranking = models.PositiveIntegerField(choices=ranking_choices)
+    image = models.ImageField(upload_to='media/product', blank=True, null=True)
