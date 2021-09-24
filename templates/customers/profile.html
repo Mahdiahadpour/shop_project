@@ -1,0 +1,21 @@
+{% extends 'customers/base.html' %}
+{% block content %}
+{% for p in profile %}
+    <div>
+        <p>first name : {{ p.first_name }}</p>
+        <p>last name : {{ p.last_name }}</p>
+        <p>email  : {{ p.email }}</p>
+        <p>birthday  : {{ p.birthday }}</p>
+        <p>ID card number : {{ p.ID_card_number }}</p>
+        <p>home number : {{ p.home_number }}</p>
+        <p>mobile number : {{ p.mobile_number }}</p>
+        <p>date entered : {{ p.date_entered }}</p>
+{#        <img src="{% url p.image %}" alt="profile image">#}
+    </div>
+    <hr>
+    <div>
+        <a href="{% url 'edit profile' %}"><button >edit profile</button></a>
+    </div>
+{% endfor %}
+    
+{% endblock %}

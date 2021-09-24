@@ -134,5 +134,6 @@ REST_FRAMEWORK = {
 }
 
 # user auth
-AUTH_USER_MODEL = 'customers.User'
+AUTH_USER_MODEL = 'customers.Customer'
 
+LOGIN_URL = 'login'

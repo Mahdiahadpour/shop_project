@@ -1,0 +1,17 @@
+{% extends 'customers/base.html' %}
+{% block content %}
+    <h1>
+    Welcome To this simple place
+    </h1>
+{% for p in product %}
+<table>
+    <tr>
+        <th>
+{#            <a href="{% url '' %}">p</a>#}
+        <p>no product yet</p>
+        </th>
+    </tr>
+</table>
+{% endfor %}
+
+{% endblock %}
