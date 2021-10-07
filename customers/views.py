@@ -40,27 +40,14 @@ def user_profile(request):
     return render(request, 'customers/profile.html', context={'profile': profile})
 
 
-# def user_profile_edit(request):
-#     if not request.user.is_authenticated:
-#         return redirect(f"{settings.LOGIN_URL}next={request.path}")
-#     form = UserProfile
-#     if request.method == 'PUT':
-#         form = UserProfile(request.PUT)
-#         if form_is
 def edit_profile(request):
+    print(request.method)
     if request.method == 'POST':
         form = UserProfile(request.POST, instance=request.user)
-        # form1 = UpdateProfileForm(request.POST, instance=request.user)
         if form.is_valid:
             form.save()
-            # form1.save()
             return redirect('profile')
     else:
         form = UserProfile(instance=request.user)
-        # form1 = UpdateProfileForm(instance=request.user)
-
         return render(request, 'customers/profile-edit.html', {'form': form})
 
-# def user_profile(request, pk):
-#     user = get_object_or_404(Customer, pk=pk)
-#     return render(request, 'profile.html', {'user': user})

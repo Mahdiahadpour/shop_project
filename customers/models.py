@@ -3,10 +3,10 @@ from django.db import models
 
 
 class Customer(AbstractUser):
-    email = models.EmailField(unique=True, null=False, blank=False)
+    email = models.EmailField()
     image = models.ImageField(upload_to='customers', blank=True, null=True)
-    first_name = models.CharField(max_length=100, null=False)
-    last_name = models.CharField(max_length=100, null=False)
+    first_name = models.CharField(max_length=100, )
+    last_name = models.CharField(max_length=100, )
     birthday = models.DateField()
     ID_card_number = models.PositiveIntegerField(unique=True)
     date_entered = models.DateField(auto_now=True)

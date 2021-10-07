@@ -45,3 +45,26 @@ class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = '__all__'
+
+
+class ChangePasswordSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(required=True, write_only=True, style={
+        'input_type': 'password'
+    })
+
+    new_password = serializers.CharField(required=True, write_only=True, style={
+        'input_type': 'password'
+    })
+    new_password_check = serializers.CharField(required=True, write_only=True, style={
+        'input_type': 'password'
+    })
+
+    class Meta:
+        model = Customer
+        fields = ['password', 'new_password', 'new_password_check', ]
+
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'new_password': {'write_only': True},
+            'new_password_check': {'write_only': True},
+        }

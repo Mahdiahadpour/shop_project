@@ -1,4 +1,5 @@
 from django.db import models
+import mptt
 
 
 # Create your models here.
