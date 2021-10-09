@@ -28,7 +28,7 @@ class Payment(models.Model):
 
 class Orders(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.RESTRICT)
-    order_detail = models.OneToOneField(OrderItem, on_delete=models.PROTECT)
+    order_detail = models.ForeignKey(OrderItem, on_delete=models.PROTECT)
     deleted = models.BooleanField(default=False)
     fulfilled = models.BooleanField(default=False, editable=False)
     fulfilled_time = models.DateField(editable=False)

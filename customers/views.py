@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from customers.forms import LoginForm, UserProfile
@@ -20,7 +21,6 @@ def my_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
             return redirect('index')
@@ -28,14 +28,10 @@ def my_login(request):
             return HttpResponse('invalid login')
     return render(request, 'customers/login.html', {'form': form})
 
-
-def index(request):
-    return HttpResponse('~~~~~~hi~~~~~~')
-
-
 def user_profile(request):
     if not request.user.is_authenticated:
-        return redirect(f"{settings.LOGIN_URL}next={request.path}")
+        print(settings.LOGIN_URL)
+        return redirect(f"{settings.LOGIN_URL}/?next={request.path}")
     profile = Customer.objects.filter(id=request.user.id)
     return render(request, 'customers/profile.html', context={'profile': profile})
 
