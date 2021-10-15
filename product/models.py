@@ -1,40 +1,50 @@
 from django.db import models
 
+# import mptt
+
 
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
-    sub_category = models.OneToOneField('self', on_delete=models.CASCADE, blank=True, null=True)
+    sub_category = models.ForeignKey('self',
+                                     on_delete=models.CASCADE,
+                                     blank=True,
+                                     null=True)
 
     def __str__(self):
         return self.category_name
 
 
 class Product(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
     price = models.PositiveIntegerField()
     price_discount = models.PositiveIntegerField(null=True, blank=True)
-    category = models.OneToOneField(Category, on_delete=models.PROTECT)
-    size_choices = (
-        ('extra small', 0),
-        ('small', 1),
-        ('medium', 2),
-        ('large', 3),
-        ('extra large', 4)
-    )
-    size = models.PositiveSmallIntegerField(choices=size_choices)
+    size_choices = (('extra small', 'extras small'), ('small', 'small'),
+                    ('medium', 'medium'), ('large', 'large'), ('extra large',
+                                                               'extra large'))
+    size = models.CharField(max_length=30, choices=size_choices)
     color = models.CharField(max_length=25)
     unit_in_stock = models.PositiveIntegerField()
     ranking_choices = (
-        ('Very Bad', 1),
-        ('Bad', 2),
-        ('Not Bad', 3),
-        ('Good', 4),
-        ('Very Good', 5),
+        ('Very Bad', 'Very Bad'),
+        ('Bad', 'Bad'),
+        ('Not Bad', 'Not Bad'),
+        ('Good', 'Good'),
+        ('Very Good', 'Very Good'),
     )
-    ranking = models.PositiveIntegerField(choices=ranking_choices)
+    ranking = models.CharField(max_length=30, choices=ranking_choices)
     image = models.ImageField(upload_to='media/product', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+
+# class Discount(models.Model):
+#     discount_code = models.PositiveIntegerField()
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     amount = models.PositiveIntegerField()
+
+#     def __str__(self):
+#         return self.amount

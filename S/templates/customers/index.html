@@ -1,0 +1,30 @@
+{% extends 'customers/base.html' %}
+{% block content %}
+{% for p in product %}
+<div class="container py-5">
+    <div class="row text-center py-3">
+        <div class="col-lg-6 m-auto">
+            <div class="row">
+
+
+                <div class="card h-100">
+                    <table>
+                        <tr>
+                            <th>
+                                <div class="card-body">
+                                    <img src="/media/product/{{ p.image }}" class="card-img-top" alt="product image">
+                                    <p class="card-text">name : {{ p.name }}</p>
+                                    <p class="card-text">price : {{ p.price }}</p>
+                                    <p class="card-text">description : {{ p.description}}</p>
+                                </div>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
