@@ -13,8 +13,10 @@
                             <th>
                                 <div class="card-body">
                                     <img src="/media/product/{{ p.image }}" class="card-img-top" alt="product image">
+                                    <br>
                                     <a class="card-text" href="{% url 'product:product_detail' pk=p.id %}" >name : {{ p.name }}</a>
                                     <p class="card-text">price : {{ p.price }}</p>
+                                    <p class="card-text">price discount : {{ p.price_discount }}</p>
                                     <p class="card-text">description : {{ p.description}}</p>
                                     <a class="card-text" href="{% url 'product:categories' category=p.category %}">{{ p.category }}</a>
                                     <input type="button" value="اضافه کردن به سبد خرید">

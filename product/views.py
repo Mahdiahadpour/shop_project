@@ -24,9 +24,9 @@ def filter_products(request, category):
 
 def product_detial(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    template_name = 'product/product_detial.html'
+    print(product)
     context = {'product': product}
-    return render(request, template_name, context)
+    return render(request, 'product/product_detail.html', context)
 
 
 @login_required

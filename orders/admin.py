@@ -7,7 +7,7 @@ class Orders_Register(admin.ModelAdmin):
         "customer",
         "deleted",
         "fulfilled_time",
-        "shipment_method",
+        # "shipment_method",
         "total",
     ]
 

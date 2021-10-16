@@ -1,9 +1,12 @@
 from django.conf import settings
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from customers.forms import LoginForm, UserProfile
+from django.views.generic import FormView
+
+from customers.forms import LoginForm, UserProfile, ChangePasswordForm
 from .models import Customer
 
 
@@ -44,3 +47,8 @@ def edit_profile(request):
     else:
         form = UserProfile(instance=request.user)
         return render(request, 'customers/profile-edit.html', {'form': form})
+
+
+class ChangePasswordView(LoginRequiredMixin, FormView):
+    form_class = ChangePasswordForm
+    template_name = 'customers/change_password.html'

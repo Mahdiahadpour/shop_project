@@ -4,6 +4,7 @@ from shop_project import settings
 from customers.models import Customer, Address
 from product.models import Product
 
+
 # Create your models here.
 
 
@@ -29,7 +30,10 @@ class Discount(models.Model):
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.RESTRICT)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(null=True)
+
+    def save(self, *args, **kwargs):
+        super(OrderItem, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.product.name}'
@@ -51,21 +55,21 @@ class Orders(models.Model):
     fulfilled = models.BooleanField(default=False, editable=False)
     fulfilled_time = models.DateField(auto_now_add=True, editable=False)
     costumer_massage = models.TextField()
-    shipment_method = models.ForeignKey('Shipment', on_delete=models.PROTECT)
+    # shipment_method = models.ForeignKey('Shipment', on_delete=models.PROTECT)
     # shipment_price = models.PositiveIntegerField(editable=False)
-    total = models.PositiveIntegerField(editable=False)
-    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    total = models.PositiveIntegerField(null=True,editable=False)
+    address = models.ForeignKey(Address,null=True, on_delete=models.PROTECT)
     order_date = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return f'order'
 
-    def save(self) -> None:
+    def save(self, *args, **kwargs) -> None:
         for item in self.order_detail.all():
             product = item.product
             self.total += (product.price -
                            product.price_discount) * item.quantity
-            self.total += self.shipment_method.price
+            # self.total += self.shipment_method.price
         return super().save()
 
 
