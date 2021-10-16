@@ -48,9 +48,9 @@ class TestProductModel(TestCase):
 class TestContactModel(TestCase):
     def setUp(self):
         self.contact = Contact.objects.create(
-            name='Mobin', email='mobin@gmail.com', subject='Some message subject.',
+            name='mahdi', email='mahdi@gmail.com', subject='Some message subject.',
             message='Some message.'
         )
 
     def test_category_is_created(self):
-        self.assertEqual(str(self.contact), 'Mobin')
+        self.assertEqual(str(self.contact), 'mahdi')
