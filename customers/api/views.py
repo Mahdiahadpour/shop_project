@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from customers.models import Customer
 
-from .serializers import UserSerializer, AddressSerializer, ChangePasswordSerializer
+from .serializers import UserSerializer, AddressSerializer, ChangePasswordSerializer, ProfileUpdateSerializer
 
 
 class CustomerSignUp(CreateAPIView):
@@ -16,6 +16,10 @@ class CustomerSignUp(CreateAPIView):
 
 class AddressInput(CreateAPIView):
     serializer_class = AddressSerializer
+
+
+class ProfileUpdateView(CreateAPIView):
+    serializer_class = ProfileUpdateSerializer
 
 
 class ChangePasswordView(UpdateAPIView):

@@ -32,7 +32,7 @@ def product_detial(request, pk):
 @login_required
 def product_history(request):
     user = request.user
-    last_items = Orders.objects.filter(customer=user).last()
+    last_items = Orders.objects.filter(customer=request.user).last()
     list_item = []
     if last_items:
         for item in last_items.order_detail.all().order_by('-pk')[:10]:

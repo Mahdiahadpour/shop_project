@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     'core',
     'customers',
     'product',
@@ -137,3 +138,5 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'customers.Customer'
 
 LOGIN_URL = 'login'
+# reset password email result in terminal
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

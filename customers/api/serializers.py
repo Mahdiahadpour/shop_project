@@ -9,9 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ['username', 'password', 'password_check', 'email', 'image', 'first_name', 'last_name', 'birthday',
-                  'ID_card_number', 'mobile_number', 'home_number',
-                  ]
+        fields = ['username', 'password', 'password_check', 'email']
         extra_kwargs = {
             'password': {'write_only': True},
         }
@@ -39,6 +37,14 @@ class UserSerializer(serializers.ModelSerializer):
         new_customer.set_password(password)
         new_customer.save()
         return new_customer
+
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ['first_name', 'last_name', 'birthday',
+                  'ID_card_number', 'mobile_number', 'home_number',
+                  ]
 
 
 class AddressSerializer(serializers.ModelSerializer):
