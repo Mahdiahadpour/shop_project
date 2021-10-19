@@ -2,6 +2,7 @@ from django.urls import path
 from .views import my_login, user_profile, my_logout, edit_profile
 from product.views import products, filter_products
 
+app_name = 'customers'
 urlpatterns = [
     path('login/', my_login, name='login'),
     path('', products, name='index'),

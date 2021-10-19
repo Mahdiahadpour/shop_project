@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Category, Product
 from orders.models import Orders
 from .forms import ProductAdd, CategoryAdd
+from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 
 
 # Create your views here.
@@ -13,16 +14,23 @@ from .forms import ProductAdd, CategoryAdd
 
 def products(request):
     product = Product.objects.all()
-    return render(request, 'customers/index.html', {'product': product})
+    p = Paginator(product, 2)
+    print(p.num_pages)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = p.page(page_num)
+    except (EmptyPage, PageNotAnInteger):
+        page = p.page(1)
+    return render(request, 'customers/index.html', {'product': page})
 
 
 def filter_products(request, category):
-    category_feild = get_object_or_404(Category, category_name=category)
-    product = Product.objects.filter(category=category_feild)
+    category_field = get_object_or_404(Category, category_name=category)
+    product = Product.objects.filter(category=category_field)
     return render(request, 'customers/index.html', {'product': product})
 
 
-def product_detial(request, pk):
+def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     print(product)
     context = {'product': product}
@@ -52,8 +60,9 @@ def product_history(request):
 def product_add(request):
     print(request.method)
     if request.method == 'POST':
-        form = ProductAdd(request.POST)
+        form = ProductAdd(request.POST, request.FILES)
         if form.is_valid:
+
             form.save()
             return HttpResponse('Ok!')
     else:

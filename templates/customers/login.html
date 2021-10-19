@@ -3,9 +3,11 @@
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="register">
+    <input type="submit" value="log in">
 </form>
-<div>
-    <a href="{% url 'api/v1/customer/reset_password' %}"><button  class="btn btn-primary btn-md my-0 p"> reset password</button></a>
+<div class="">
+    <a href="{% url 'password_reset:reset-password-request' %}"><button  class="btn btn-primary btn-md my-0 p"> reset password</button> </a>
+    <a href="{% url 'customers_api:signUp' %}"><button  class="btn btn-primary btn-md my-0 p"> register </button></a>
+
 </div>
 {% endblock %}

@@ -10,7 +10,7 @@ class Customer(AbstractUser):
     email = models.EmailField()
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
-    birthday = models.DateField()
+    birthday = models.DateField(null=True, blank=True)
     ID_card_number = models.PositiveIntegerField(unique=True)
     date_entered = models.DateField(auto_now=True)
     mobile_number = models.CharField(max_length=11, unique=True)

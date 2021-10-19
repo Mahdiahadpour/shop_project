@@ -1,11 +1,7 @@
-from django.conf import settings
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import FormView
-
 from customers.forms import LoginForm, UserProfile
 from .models import Customer
 
@@ -27,7 +23,7 @@ def my_login(request):
         print(user)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('customers:index')
         else:
             return HttpResponse('invalid login')
     return render(request, 'customers/login.html', {'form': form})
