@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import FormView
 
-from customers.forms import LoginForm, UserProfile, ChangePasswordForm
+from customers.forms import LoginForm, UserProfile
 from .models import Customer
 
 
@@ -49,7 +49,3 @@ def edit_profile(request):
         form = UserProfile(instance=request.user)
         return render(request, 'customers/profile-edit.html', {'form': form})
 
-
-class ChangePasswordView(LoginRequiredMixin, FormView):
-    form_class = ChangePasswordForm
-    template_name = 'customers/change_password.html'
