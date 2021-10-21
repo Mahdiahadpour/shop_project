@@ -10,6 +10,6 @@ urlpatterns = [
     path('history', product_history),
     path('product_detials/<int:pk>', product_detail, name='product_detail'),
     path('categories/<str:category>', filter_products, name='categories'),
-    path('product_history', product_history, name='product_history'),
+    # path('product_history', product_history, name='product_history'),
     path('c', c)
 ]

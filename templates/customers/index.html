@@ -33,9 +33,9 @@
 </div>
 {% endfor %}
 {% if product.has_previous %}
-<a href="{% url 'customers:index' %}?page={{<int:item.previous_page_number>}}"> Previous Page</a>
+<a href="{% url 'customers:index' %}?page={{product.previous_page_number}}"> Previous Page</a>
 {% endif %}
 {% if product.has_next %}
-<a href="{% url 'customers:index' %}?page={{item.next_page_number}}"> Next Page</a>
+<a href="{% url 'customers:index' %}?page={{product.next_page_number}}"> Next Page</a>
 {% endif %}
 {% endblock %}

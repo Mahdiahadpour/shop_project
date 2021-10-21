@@ -1,8 +1,5 @@
 {% extends 'customers/base.html' %}
 {% block content %}
-    <p>{{ order.total }}</p>
-    <form action="" method="get">
-    {% csrf_token %}
-    {{ form.as_p }}
-    </form>
+    <p>{{ order.name }}</p>
+    <p>{{ o.total }}</p>
 {% endblock %}

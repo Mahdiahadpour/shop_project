@@ -1,20 +1,12 @@
-from django.contrib.auth import authenticate
 from django.shortcuts import render, get_object_or_404, redirect
-
-# Create your views here.
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.db.models import F
-from django.http import HttpResponse
 from django.shortcuts import render
-from customers.models import Address
 from orders.models import Discount, Orders
 from product.models import Product
 from .models import OrderItem
 from .forms import BasketForm
 
 
-
+# Create your views here.
 def add_item_view(request, pk):
     item = get_object_or_404(Product, pk=pk)
     order_item = OrderItem.objects.create(product=item)
@@ -32,7 +24,7 @@ def add_item_view(request, pk):
 
 
 def basket(request):
-    order = Orders.objects.get(customer=request.user)
+    order = Orders.objects.filter(customer=request.user)
     return render(request, 'orders/basket.html', {'order': order})
 
 

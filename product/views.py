@@ -1,12 +1,10 @@
-from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from .models import Category, Product
 from orders.models import Orders
 from .forms import ProductAdd, CategoryAdd
-from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage
 
 
 # Create your views here.
@@ -15,11 +13,10 @@ from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 def products(request):
     product = Product.objects.all()
     p = Paginator(product, 2)
-    print(p.num_pages)
     page_num = request.GET.get('page', 1)
     try:
         page = p.page(page_num)
-    except (EmptyPage, PageNotAnInteger):
+    except EmptyPage:
         page = p.page(1)
     return render(request, 'customers/index.html', {'product': page})
 
@@ -32,7 +29,6 @@ def filter_products(request, category):
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    print(product)
     context = {'product': product}
     return render(request, 'product/product_detail.html', context)
 
@@ -44,10 +40,7 @@ def product_history(request):
     list_item = []
     if last_items:
         for item in last_items.order_detail.all().order_by('-pk')[:10]:
-            print(item.quantity)
-            print(item.product)
             list_item.append(item)
-            # list_item.append(item.order_detial.product)
 
     else:
         return HttpResponse("You don't have orders yet!")
@@ -58,11 +51,9 @@ def product_history(request):
 
 
 def product_add(request):
-    print(request.method)
     if request.method == 'POST':
         form = ProductAdd(request.POST, request.FILES)
         if form.is_valid:
-
             form.save()
             return HttpResponse('Ok!')
     else:

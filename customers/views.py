@@ -1,3 +1,4 @@
+import requests
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -11,7 +12,7 @@ from .models import Customer
 
 def my_logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('customers:login')
 
 
 def my_login(request):
@@ -20,7 +21,6 @@ def my_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
             return redirect('customers:index')
@@ -45,3 +45,9 @@ def edit_profile(request):
         form = UserProfile(instance=request.user)
         return render(request, 'customers/profile-edit.html', {'form': form})
 
+
+@login_required()
+def change_password_view(request):
+    r = requests.get('http://127.0.0.1:8000/api/v1/customers/signup ').json()
+    print(r)
+    return render(request, 'customers/change_password.html', {'content': r})

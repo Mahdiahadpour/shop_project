@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import add_item_view,basket
+from .views import add_item_view, basket
+
 app_name = 'orders'
 urlpatterns = [
     path('basket/', basket, name='basket'),
