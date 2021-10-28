@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.shortcuts import render
 from orders.models import Discount, Orders
@@ -7,6 +8,7 @@ from .forms import BasketForm
 
 
 # Create your views here.
+@login_required()
 def add_item_view(request, pk):
     item = get_object_or_404(Product, pk=pk)
     order_item = OrderItem.objects.create(product=item)

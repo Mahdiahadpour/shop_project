@@ -5,23 +5,30 @@
     <div class="row text-center py-3">
         <div class="col-lg-6 m-auto">
             <div class="row">
-
-
                 <div class="card h-100">
                     <table>
                         <tr>
                             <th>
-                                <div class="card-body">
-                                    {% if person.image %}
+                                <div class="card-body ">
+                                    {% if p.image %}
                                     <img src="{{ p.image.url }}" class="card-img-top" alt="product image">
                                     {% endif %}
                                     <br>
-                                    <a class="card-text" href="{% url 'product:product_detail' pk=p.id %}">name : {{ p.name }}</a>
+                                    <a class="card-text" href="{% url 'product:product_detail' pk=p.id %}">name : {{
+                                        p.name }}</a>
                                     <p class="card-text">price : {{ p.price }}</p>
+
+                                    {% if p.price_discount %}
+                                    <u class="card-text">price : {{ p.price }}</u>
                                     <p class="card-text">price discount : {{ p.price_discount }}</p>
-                                    <p class="card-text">description : {{ p.description}}</p>
-                                    <a class="card-text" href="{% url 'product:categories' category=p.category %}">{{ p.category }}</a>
-                                    <input type="button" value="اضافه کردن به سبد خرید">
+                                    {% endif%}
+                                    <p class="card-text">description : {{ p.description }}</p>
+                                    <a class="card-text" href="{% url 'product:categories' category=p.category %}">
+                                        category :{{ p.category }}</a>
+                                    <a class="card-text" href="{% url 'product:product_detail' pk=p.id %}">
+                                        <button class="btn btn-warning">مشاهده بیشتر</button>
+                                    </a>
+
                                 </div>
                             </th>
                         </tr>
@@ -31,11 +38,13 @@
         </div>
     </div>
 </div>
-{% endfor %}
-{% if product.has_previous %}
-<a href="{% url 'customers:index' %}?page={{product.previous_page_number}}"> Previous Page</a>
-{% endif %}
-{% if product.has_next %}
-<a href="{% url 'customers:index' %}?page={{product.next_page_number}}"> Next Page</a>
-{% endif %}
+<div class="row">
+    {% endfor %}
+    {% if product.has_previous %}
+    <a href="{% url 'customers:index' %}?page={{product.previous_page_number}}" class="btn-block"> Previous Page</a>
+    {% endif %}
+    {% if product.has_next %}
+    <a href="{% url 'customers:index' %}?page={{product.next_page_number}}" class="btn-block"> Next Page</a>
+    {% endif %}
+</div>
 {% endblock %}

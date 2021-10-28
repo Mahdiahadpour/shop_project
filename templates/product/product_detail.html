@@ -10,15 +10,17 @@
                         <tr>
                             <th>
                                 <div class="card-body">
-                                    {% if person.image %}
-
-                                    <img src="/media/product/{{ product.image.url }}" class="card-img-top"
-                                         alt="product image">
+                                    {% if product.image %}
+                                    <img src="{{ product.image.url }}" class="card-img-top" alt="product image">
                                     {% endif %}
-                                    <p class="card-text">name : {{ product.name }}</p>
+
+                                    <p class="card-text">name : {{   product.name }}</p>
                                     <p class="card-text">price : {{ product.price }}</p>
                                     <p class="card-text">price discount : {{ product.price_discount }}</p>
                                     <p class="card-text">description : {{ product.description}}</p>
+                                    <p class="card-text">ranking : {{ product.ranking}}</p>
+                                    <p class="card-text">color : {{ product.color}}</p>
+
                                     {# <input type="button" value="افزودن به سبد خرید">#}
                                     <a href="{% url 'orders:add_to_cart' pk=product.id %}"
                                        class="btn btn-primary btn-md my-0 p">

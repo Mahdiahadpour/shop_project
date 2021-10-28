@@ -149,6 +149,6 @@ REST_FRAMEWORK = {
 # user auth
 AUTH_USER_MODEL = 'customers.Customer'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'customers:login'
 # reset password email result in terminal
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

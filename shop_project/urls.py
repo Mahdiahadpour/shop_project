@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('core.api.urls')),
     path('', include('customers.urls', namespace='customers')),
-    path('product/', include('product.urls')),
+    path('product/', include('product.urls',namespace='product')),
     path('order/', include('orders.urls')),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 
